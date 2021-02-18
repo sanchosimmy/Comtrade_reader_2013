@@ -4,6 +4,15 @@ import math
 import struct
 import matplotlib.pyplot as plt
 import numpy as np
+def isPerfectSquare(x):
+ 
+    #if x >= 0, 
+    if(x >= 0):
+        sr = math.sqrt(x)
+         
+        #return boolean T/F
+        return ((sr*sr) == x)
+    return false
 Tk().withdraw()
 print("Sancho's COMTRADE reader")
 filename = fd.askopenfilename(initialdir='')
@@ -68,12 +77,20 @@ for y in range(0,samples):
         tmp.append(ans)
     data.append(tmp)
 data=np.array(data)
+if(isPerfectSquare(analog)):
+    row=int(math.sqrt(analog))
+    col=int(math.sqrt(analog))
+else:
+    row= int(analog/2)
+    col=analog-row 
+if(analog>row*col):
+    row=row+1
 for x in range(0,analog):
     # plt.figure(x+1)
     if(x==0):
-        n=plt.subplot(2, 2, x+1)
+        n=plt.subplot(row, col, x+1)
     if(x!=0):
-        n=plt.subplot(2, 2, x+1,sharex=n)
+        plt.subplot(row, col, x+1,sharex=n)
     plt.plot(data[:,2+x])
     plt.xlabel('Samples')
     plt.ylabel(analogchannelname[x]+' ('+unit[x]+')')
