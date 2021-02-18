@@ -69,25 +69,15 @@ for y in range(0,samples):
     data.append(tmp)
 data=np.array(data)
 for x in range(0,analog):
-    plt.figure(x+1)
+    # plt.figure(x+1)
+    if(x==0):
+        n=plt.subplot(2, 2, x+1)
+    if(x!=0):
+        n=plt.subplot(2, 2, x+1,sharex=n)
     plt.plot(data[:,2+x])
     plt.xlabel('Samples')
     plt.ylabel(analogchannelname[x]+' ('+unit[x]+')')
-# for y in range(0,analog):
-#     plt.xlabel('Samples')
-#     plt.ylabel(digitalchannelname[y])
-#     plt.figure(x+1)
-#     plt.plot(data[:,2+x])
-
-# plt.xlabel('Samples')
-# plt.ylabel('Value')
-
-# plot1 = plt.figure(1)
-# plt.plot(data[:,2])
-# plot2 = plt.figure(2)
-# plt.plot(data[:,3])
-# plot2 = plt.figure(3)
-# plt.plot(data[:,4])
-
+    plt.title(analogchannelname[x])
+plt.suptitle(f"PmMU id = {pmu_id}, PMU name={pmu_name} \n  Analog Values")
 plt.show()
 f.close()	
